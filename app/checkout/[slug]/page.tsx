@@ -11,7 +11,7 @@ import { Icon } from '@iconify/react'
 import { Button } from '@nextui-org/button'
 import Image from 'next/image'
 import { useParams, useRouter, useSearchParams } from 'next/navigation'
-import React, { useContext, useEffect, useState } from 'react'
+import React, { Suspense, useContext, useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import Select from 'react-select';
 
@@ -123,66 +123,68 @@ const CheckoutPage = () => {
 
 
   return (
-    <div>
-      <section className="bg-gray-100">
-        <div className="container m-auto py-8">
-          <div className="mb-6">
-            <p className="text-burem-500 font-bold">Checkout</p>
-          </div>
-          <div className="flex flex-col md:flex-row gap-8">
-            <div className="bg-white p-6 rounded-lg flex flex-col md:flex-row gap-4 md:w-8/12">
-              <Image height={300} width={300} alt="" src={img} className="md:w-32 md:h-32 object-cover object-center rounded-lg" />
-              <div>
-                <h2 className="text-gray-700 font-semibold">{room?.name}</h2>
-                <p className="text-primary text-sm py-3">{DateIdparser(start!)} -  {DateIdparser(end!)} </p>
-                
-                <p className="text-sm font-semibold text-gray-500 mb-1">Harga / Kamar /Malam</p>
-                <div className="flex items-center gap-3">
-                  <p className="text-primary font-bold text-xl">{NumberToIdr(room?.price)}</p>
-                  <p className="text-warning font-semibold">/ 1 malam</p>
+    <Suspense>
+      <div>
+        <section className="bg-gray-100">
+          <div className="container m-auto py-8">
+            <div className="mb-6">
+              <p className="text-burem-500 font-bold">Checkout</p>
+            </div>
+            <div className="flex flex-col md:flex-row gap-8">
+              <div className="bg-white p-6 rounded-lg flex flex-col md:flex-row gap-4 md:w-8/12">
+                <Image height={300} width={300} alt="" src={img} className="md:w-32 md:h-32 object-cover object-center rounded-lg" />
+                <div>
+                  <h2 className="text-gray-700 font-semibold">{room?.name}</h2>
+                  <p className="text-primary text-sm py-3">{DateIdparser(start!)} -  {DateIdparser(end!)} </p>
+                  
+                  <p className="text-sm font-semibold text-gray-500 mb-1">Harga / Kamar /Malam</p>
+                  <div className="flex items-center gap-3">
+                    <p className="text-primary font-bold text-xl">{NumberToIdr(room?.price)}</p>
+                    <p className="text-warning font-semibold">/ 1 malam</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="hidden md:block md:w-4/12 bg-white p-6 rounded-lg">
+                <div className="mb-4 pb-4 border-b border-gray-300">
+                  <p className="font-semibold text-lg text-gray-700">Total bayar</p>
+                </div>
+                <div className="pb-4 mb-3 border-b border-gray-300">
+                  <p className="text-gray-500 mb-1">{room?.name}</p>
+                  <p className="text-primary font-bold text-xl mb-2">{NumberToIdr(room?.price * getDiff(new Date(start!), new Date(end!)))}</p>
+                </div>
+                <div>
+                  <p className="text-gray-700 text-sm mb-2">Pilih metode pembayaran</p>
+                  <Select
+                    className="basic-single"
+                    classNamePrefix="select"
+                    isSearchable={true}
+                    name="payment_method"
+                    value={paymentMethod}
+                    onChange={(e) => setPaymentMethod(e)}
+                    options={[
+                      {
+                        value: "cash",
+                        label: "Cash"
+                      },
+                      {
+                        value: "transfer",
+                        label: "Transfer"
+                      }
+                    ]}
+                  />
+                </div>
+                <div>
+                  <Button isLoading={loadingCo} onClick={() => handleCheckout()} color="primary" className="mt-4"  size='lg' fullWidth endContent={<Icon icon="solar:card-bold-duotone"/>}>Buat Pesanan Sekarang</Button>
                 </div>
               </div>
             </div>
-
-            <div className="hidden md:block md:w-4/12 bg-white p-6 rounded-lg">
-              <div className="mb-4 pb-4 border-b border-gray-300">
-                <p className="font-semibold text-lg text-gray-700">Total bayar</p>
-              </div>
-              <div className="pb-4 mb-3 border-b border-gray-300">
-                <p className="text-gray-500 mb-1">{room?.name}</p>
-                <p className="text-primary font-bold text-xl mb-2">{NumberToIdr(room?.price * getDiff(new Date(start!), new Date(end!)))}</p>
-              </div>
-              <div>
-                <p className="text-gray-700 text-sm mb-2">Pilih metode pembayaran</p>
-                <Select
-                  className="basic-single"
-                  classNamePrefix="select"
-                  isSearchable={true}
-                  name="payment_method"
-                  value={paymentMethod}
-                  onChange={(e) => setPaymentMethod(e)}
-                  options={[
-                    {
-                      value: "cash",
-                      label: "Cash"
-                    },
-                    {
-                      value: "transfer",
-                      label: "Transfer"
-                    }
-                  ]}
-                />
-              </div>
-              <div>
-                <Button isLoading={loadingCo} onClick={() => handleCheckout()} color="primary" className="mt-4"  size='lg' fullWidth endContent={<Icon icon="solar:card-bold-duotone"/>}>Buat Pesanan Sekarang</Button>
-              </div>
-            </div>
           </div>
-        </div>
 
-      </section>
-      <LoadingState isLoading={isLoading} />
-    </div>
+        </section>
+        <LoadingState isLoading={isLoading} />
+      </div>
+    </Suspense>
   )
 }
 
