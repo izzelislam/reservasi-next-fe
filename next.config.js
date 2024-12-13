@@ -8,6 +8,9 @@ const nextConfig = {
   images: {
     domains: ['res.cloudinary.com', 'unsplash.com', 'localhost', 'reservasi.tvw-group.com'],
   },
+  experimental: {
+    missingSuspenseWithCSRBailout: false,
+  }
 }
 
 module.exports = nextConfig
