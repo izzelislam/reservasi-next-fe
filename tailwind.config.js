@@ -5,7 +5,8 @@ module.exports = {
   content: [
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
-    './node_modules/@nextui-org/theme/dist/components/(accordion|avatar|button|card|checkbox|chip|code|date-picker|dropdown|input|kbd|link|listbox|modal|navbar|pagination|popover|skeleton|snippet|toggle|tabs|divider|ripple|spinner|calendar|date-input|menu).js'
+    './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}'
+    // './node_modules/@nextui-org/theme/dist/components/(accordion|avatar|button|card|checkbox|chip|code|date-picker|dropdown|input|kbd|link|listbox|modal|navbar|pagination|popover|skeleton|snippet|toggle|tabs|divider|ripple|spinner|calendar|date-input|menu).js'
   ],
   theme: {
     screens: {
