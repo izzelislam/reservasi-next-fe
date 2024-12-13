@@ -75,7 +75,6 @@ const page = () => {
 
 
   return (
-    <Suspense>
       <div className='bg-[#F4F7FE] py-4'>
         <section className="mb-6 mt-12">
           <div className='container m-auto'>
@@ -154,7 +153,8 @@ const page = () => {
         
         <LoadingState isLoading={isLoading} />
       </div>
-    </Suspense>
+    // <Suspense>
+    // </Suspense>
   )
 }
 
