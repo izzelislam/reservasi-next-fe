@@ -55,10 +55,10 @@ export default function RootLayout({
   return (
     <html suppressHydrationWarning lang="en">
       <head />
-      <body className={inter.className}>
+      <body className={`${inter.className}`}>
         <ToasterProvider />
         <AuthProvider>
-          <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
+          <Providers themeProps={{ attribute: "class", defaultTheme: 'light' }}>
             <ProgressbarC/>
 
             {/* header */}

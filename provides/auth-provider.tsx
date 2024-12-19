@@ -23,12 +23,12 @@ export function AuthProvider({ children }: any) {
     } catch (error:any) {
       setIsLogin(false)
       setUser({})
-      Cookies.remove('_auth')
-      Cookies.remove('_is_auth')
-      setAuthState({
-        _auth: '',
-        _is_auth: ''
-      })
+      // Cookies.remove('_auth')
+      // Cookies.remove('_is_auth')
+      // setAuthState({
+      //   _auth: '',
+      //   _is_auth: ''
+      // })
     }
   }
   

@@ -6,11 +6,8 @@ const nextConfig = {
   },
   // image domain
   images: {
-    domains: ['res.cloudinary.com', 'unsplash.com', 'localhost', 'reservasi.tvw-group.com'],
+    domains: ['res.cloudinary.com', 'unsplash.com', 'localhost', 'geni-reservasi.tvw-group.com'],
   },
-  experimental: {
-    missingSuspenseWithCSRBailout: false,
-  }
 }
 
 module.exports = nextConfig
